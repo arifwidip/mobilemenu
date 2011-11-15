@@ -29,6 +29,7 @@ $.fn.mobileMenu = function(options) {
 
 		// Create default option
 		$('<option />', {
+			"value"		: '#',
 			"text"		: settings.defaultText
 		}).appendTo( '.' + settings.className );
 
@@ -57,7 +58,10 @@ $.fn.mobileMenu = function(options) {
 
 		// Change event on select element
 		$('.' + settings.className).change(function(){
-			window.location.href = $(this).val();
+			var locations = $(this).val();
+			if( locations !== '#' ) {
+				window.location.href = $(this).val();
+			};
 		});
 
 	}); // End this.each
