@@ -27,7 +27,7 @@ jQuery mobilemenu have some options:
 
 * `className`: Class name for dropdown select menu
 
-* `subMenuClass`: Class name for submenu (required)
+* `subMenuClass`: Class name for submenu /* Updated you don't need to add class to sub menu */
 
 * `subMenuDash`: Separator for submenu
 
@@ -35,7 +35,6 @@ jQuery mobilemenu have some options:
 $('.menu').mobileMenu({
 	defaultText: 'Navigate to...',
 	className: 'select-menu',
-	subMenuClass: 'sub-menu',
 	subMenuDash: '&ndash;'
 });
 ```

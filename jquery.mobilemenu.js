@@ -22,6 +22,9 @@ $.fn.mobileMenu = function(options) {
 		el = $(this);
 	
 	this.each(function(){
+		// ad class to submenu list
+		el.find('ul').addClass(settings.subMenuClass);
+
 		// Create base menu
 		$('<select />',{
 			'class' : settings.className
