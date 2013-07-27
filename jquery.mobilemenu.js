@@ -1,7 +1,7 @@
 /**
  * jQuery Mobile Menu 
  * Turn unordered list menu into dropdown select menu
- * version 1.0(31-OCT-2011)
+ * version 1.1(27-JULY-2013)
  * 
  * Built on top of the jQuery library
  *   http://jquery.com
@@ -22,27 +22,30 @@ $.fn.mobileMenu = function(options) {
 		el = $(this);
 	
 	this.each(function(){
+		var $el = $(this),
+			$select_menu;
+
 		// ad class to submenu list
-		el.find('ul').addClass(settings.subMenuClass);
+		$el.find('ul').addClass(settings.subMenuClass);
 
 		// Create base menu
-		$('<select />',{
-			'class' : settings.className
-		}).insertAfter( el );
+		var $select_menu = $('<select />',{
+			'class' : settings.className + ' ' + el.get(0).className
+		}).insertAfter( $el );
 
 		// Create default option
 		$('<option />', {
 			"value"		: '#',
 			"text"		: settings.defaultText
-		}).appendTo( '.' + settings.className );
+		}).appendTo( $select_menu );
 
 		// Create select option from menu
-		el.find('a').each(function(){
+		$el.find('a').each(function(){
 			var $this 	= $(this),
-					optText	= '&nbsp;' + $this.text(),
-					optSub	= $this.parents( '.' + settings.subMenuClass ),
-					len			= optSub.length,
-					dash;
+				optText	= '&nbsp;' + $this.text(),
+				optSub	= $this.parents( '.' + settings.subMenuClass ),
+				len		= optSub.length,
+				dash;
 			
 			// if menu has sub menu
 			if( $this.parents('ul').hasClass( settings.subMenuClass ) ) {
@@ -55,12 +58,12 @@ $.fn.mobileMenu = function(options) {
 				"value"	: this.href,
 				"html"	: optText,
 				"selected" : (this.href == window.location.href)
-			}).appendTo( '.' + settings.className );
+			}).appendTo( $select_menu );
 
 		}); // End el.find('a').each
 
 		// Change event on select element
-		$('.' + settings.className).change(function(){
+		$select_menu.change(function(){
 			var locations = $(this).val();
 			if( locations !== '#' ) {
 				window.location.href = $(this).val();
